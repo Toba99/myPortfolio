@@ -117,7 +117,7 @@ export default function Home() {
                 <h3 className="text-lg font-medium pt-2 pb-2">PIGGYVEST</h3>
                 <h4 className="py-2 text-teal-600">Software Engineer</h4>
                 <p className="text-gray-800 py-1">Engineered and deployed sophisticated email services within the event data system, ensuring seamless integration and functionality by meticulously addressing all project requirements and feedback.</p>
-                <p className="text-gray-800 py-1">Developed and maintained front-end functionalities of the company's website, specializing in UI/UX design and web development with a focus on HTML, CSS, and JavaScript to enhance user experience and interface efficiency.</p>
+                <p className="text-gray-800 py-1">Developed and maintained front-end functionalities of the company&apos;s website, specializing in UI/UX design and web development with a focus on HTML, CSS, and JavaScript to enhance user experience and interface efficiency.</p>
                 <p className="text-gray-800 py-1">Created prototypes for applications and websites, ensuring efficient and effective design implementations that meet both user needs and technical specifications.</p>
             </div>
             <div className="text-center shadow-lg p-10 rounded-xl my-10 dark:bg-white">
