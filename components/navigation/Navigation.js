@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { site } from "../../data/site";
 import { useExperience } from "../../contexts/ExperienceContext";
 import { cn } from "../../lib/cn";
@@ -187,50 +187,43 @@ export default function Navigation() {
           </button>
         </div>
 
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="relative overflow-hidden border-t border-white/30 md:hidden"
-            >
-              <div className="space-y-4 px-4 py-5">
-                <div className="flex flex-col gap-2">
-                  {site.nav.map((item) => (
-                    <Link key={item.href} href={item.href}>
-                      <a
-                        onClick={() => setOpen(false)}
-                        className={cn(
-                          "rounded-2xl px-4 py-3 text-base font-medium",
-                          isActive(item.href)
-                            ? "bg-ink text-white"
-                            : "border border-white/40 bg-white/50 text-ink"
-                        )}
-                      >
-                        {item.label}
-                      </a>
-                    </Link>
-                  ))}
-                </div>
-                <ExperienceSwitcher />
-                <AvailabilityBadge />
-                <a
-                  href={site.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
-                  className="block rounded-2xl border border-white/40 bg-white/50 px-4 py-3 text-center text-base font-semibold text-ink"
-                >
-                  Download CV ↗
-                </a>
-                <Button href="/contact" className="w-full" onClick={() => setOpen(false)}>
-                  Get in touch ↗
-                </Button>
+        {open && (
+          <div className="relative border-t border-white/30 md:hidden">
+            <div className="space-y-4 px-4 py-5">
+              <div className="flex flex-col gap-2">
+                {site.nav.map((item) => (
+                  <Link key={item.href} href={item.href}>
+                    <a
+                      onClick={() => setOpen(false)}
+                      className={cn(
+                        "rounded-2xl px-4 py-3 text-base font-medium",
+                        isActive(item.href)
+                          ? "bg-ink text-white"
+                          : "border border-white/40 bg-white/50 text-ink"
+                      )}
+                    >
+                      {item.label}
+                    </a>
+                  </Link>
+                ))}
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <ExperienceSwitcher />
+              <AvailabilityBadge />
+              <a
+                href={site.resume}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpen(false)}
+                className="block rounded-2xl border border-white/40 bg-white/50 px-4 py-3 text-center text-base font-semibold text-ink"
+              >
+                Download CV ↗
+              </a>
+              <Button href="/contact" className="w-full" onClick={() => setOpen(false)}>
+                Get in touch ↗
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
