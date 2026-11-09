@@ -1,25 +1,27 @@
 import { motion, useReducedMotion } from "framer-motion";
 
+/**
+ * Motion helpers that never leave content stuck invisible.
+ * Production was hanging Framer enter animations at opacity 0, which made
+ * personal details look missing even though they were in the DOM.
+ */
 export function FadeIn({
   children,
   className,
   delay = 0,
-  y = 24,
+  y = 16,
   as: Component = motion.div,
-  once = true,
   ...props
 }) {
   const reduce = useReducedMotion();
 
-  // Use mount animation (animate), not whileInView. On this site content often
-  // mounts after the experience choice, and whileInView was leaving whole
-  // sections stuck at opacity 0 so personal details looked "missing".
   return (
     <Component
       className={className}
-      initial={reduce ? false : { opacity: 0, y }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay }}
+      initial={false}
+      animate={reduce ? undefined : { opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay }}
+      style={{ opacity: 1 }}
       {...props}
     >
       {children}
@@ -28,17 +30,15 @@ export function FadeIn({
 }
 
 export function Stagger({ children, className, delay = 0 }) {
-  const reduce = useReducedMotion();
-
   return (
     <motion.div
       className={className}
-      initial={reduce ? false : "hidden"}
-      animate={reduce ? undefined : "show"}
+      initial={false}
+      animate="show"
       variants={{
         hidden: {},
         show: {
-          transition: { staggerChildren: 0.08, delayChildren: delay },
+          transition: { staggerChildren: 0.06, delayChildren: delay },
         },
       }}
     >
@@ -47,24 +47,20 @@ export function Stagger({ children, className, delay = 0 }) {
   );
 }
 
-export function StaggerItem({ children, className, y = 20 }) {
-  const reduce = useReducedMotion();
-
+export function StaggerItem({ children, className }) {
   return (
     <motion.div
       className={className}
-      variants={
-        reduce
-          ? undefined
-          : {
-              hidden: { opacity: 0, y },
-              show: {
-                opacity: 1,
-                y: 0,
-                transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-              },
-            }
-      }
+      initial={false}
+      variants={{
+        hidden: { opacity: 1, y: 0 },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+        },
+      }}
+      style={{ opacity: 1 }}
     >
       {children}
     </motion.div>
@@ -73,12 +69,7 @@ export function StaggerItem({ children, className, y = 20 }) {
 
 export function PageTransition({ children, className }) {
   return (
-    <motion.div
-      className={className}
-      initial={false}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <motion.div className={className} initial={false} style={{ opacity: 1 }}>
       {children}
     </motion.div>
   );
