@@ -62,6 +62,9 @@ export default function InteractiveWriting() {
           {(constraints) =>
             articles.map((article, index) => {
               const pos = positions[index];
+              const external = article.href?.startsWith("http");
+              const linkClass =
+                "mt-4 inline-block text-xs font-semibold text-ink underline-offset-2 hover:underline";
               return (
                 <Draggable
                   key={article.slug}
@@ -103,13 +106,22 @@ export default function InteractiveWriting() {
                     <span className="mt-4 inline-block text-xs font-semibold text-ink-soft">
                       Coming soon
                     </span>
+                  ) : external ? (
+                    <a
+                      href={article.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      draggable={false}
+                      className={linkClass}
+                      onClick={(event) => event.stopPropagation()}
+                    >
+                      {articleLinkLabel(article)}
+                    </a>
                   ) : (
                     <a
                       href={article.href}
-                      target={article.href.startsWith("http") ? "_blank" : undefined}
-                      rel={article.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       draggable={false}
-                      className="mt-4 inline-block text-xs font-semibold text-ink underline-offset-2 hover:underline"
+                      className={linkClass}
                       onClick={(event) => event.stopPropagation()}
                     >
                       {articleLinkLabel(article)}
