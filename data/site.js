@@ -26,7 +26,7 @@ export const site = {
     { label: "Contact", href: "/contact" },
   ],
   eyebrow: "Software Engineer · Technical Program Manager · Product Owner",
-  headline: "I figure out what needs to be built, then make it happen.",
+  headline: "I turn complex problems into products people Use.",
   supporting:
     "I'm Toba, a software engineer and product builder from Nigeria, currently based in the UK. I work at the intersection of technology, product and business, turning ideas into useful products.",
   aboutHeadline: "I'm Toba",
