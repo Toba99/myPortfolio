@@ -1,5 +1,3 @@
-import { useRef } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
 import { site } from "../../data/site";
 import { useExperience } from "../../contexts/ExperienceContext";
 import { cn } from "../../lib/cn";
@@ -9,18 +7,11 @@ import Magnet from "../fx/Magnet";
 /** The one closing call to action for every page, then a quiet link row. */
 export default function Footer() {
   const { isGraphic } = useExperience();
-  const reduce = useReducedMotion();
-  const ctaRef = useRef(null);
-  const inView = useInView(ctaRef, { once: true, amount: 0.35, margin: "0px 0px -8% 0px" });
 
   return (
     <footer className={cn("relative overflow-hidden", isGraphic ? "bg-cream" : "bg-ash")}>
       <div className="mx-auto max-w-shell px-5 pb-10 pt-8 md:px-8 md:pt-12">
-        <motion.div
-          ref={ctaRef}
-          initial={reduce ? false : { opacity: 0, y: 28 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        <div
           className={cn(
             "relative mb-10 overflow-hidden rounded-[2rem] px-6 py-10 md:px-10 md:py-14",
             isGraphic ? "bg-ink text-white" : "border border-black/5 bg-white text-ink"
@@ -50,7 +41,7 @@ export default function Footer() {
               </Button>
             </Magnet>
           </div>
-        </motion.div>
+        </div>
 
         <div
           className={cn(
@@ -62,13 +53,13 @@ export default function Footer() {
             © {new Date().getFullYear()} {site.name}
           </p>
           <div className="flex flex-wrap items-center gap-5 text-sm font-medium">
-            <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer">
+            <a href={site.social.linkedin} target="_blank" rel="noreferrer">
               LinkedIn
             </a>
-            <a href={site.social.github} target="_blank" rel="noopener noreferrer">
+            <a href={site.social.github} target="_blank" rel="noreferrer">
               GitHub
             </a>
-            <a href={site.social.x} target="_blank" rel="noopener noreferrer">
+            <a href={site.social.x} target="_blank" rel="noreferrer">
               X
             </a>
             <a href={`mailto:${site.email}`}>Email</a>
