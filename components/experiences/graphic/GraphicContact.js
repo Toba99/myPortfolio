@@ -4,6 +4,7 @@ import { FadeIn } from "../../animations/Motion";
 import ColorWash from "../../fx/ColorWash";
 import Magnet from "../../fx/Magnet";
 import Button from "../../shared/Button";
+import CopyEmailButton from "../../shared/CopyEmailButton";
 import SplitText from "../../SplitText";
 import { LimeBlob, RedSphere, SquiggleUnderline, YellowRays } from "./GraphicShapes";
 
@@ -60,6 +61,9 @@ export default function GraphicContact() {
               <Button href={`mailto:${site.email}`} external className="!uppercase !tracking-[0.08em]">
                 {site.email}
               </Button>
+            </Magnet>
+            <Magnet strength={16}>
+              <CopyEmailButton className="!uppercase !tracking-[0.08em]" />
             </Magnet>
             <Magnet strength={16}>
               <Button href={site.social.linkedin} external variant="pill">

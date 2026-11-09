@@ -2,6 +2,7 @@ import { site } from "../../data/site";
 import { useExperience } from "../../contexts/ExperienceContext";
 import { cn } from "../../lib/cn";
 import Button from "./Button";
+import CopyEmailButton from "./CopyEmailButton";
 import Magnet from "../fx/Magnet";
 
 /** The one closing call to action for every page, then a quiet link row. */
@@ -34,6 +35,12 @@ export default function Footer() {
               <Button href={`mailto:${site.email}`} external>
                 Email me ↗
               </Button>
+            </Magnet>
+            <Magnet strength={16}>
+              <CopyEmailButton
+                variant={isGraphic ? "pill" : "lime"}
+                className={isGraphic ? "!border-white/20 !bg-white/10 !text-white hover:!bg-white/20" : undefined}
+              />
             </Magnet>
             <Magnet strength={16}>
               <Button href={site.resume} external variant="pill">

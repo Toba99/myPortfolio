@@ -9,6 +9,7 @@ import Magnet from "../../fx/Magnet";
 import Tilt from "../../fx/Tilt";
 import TextPressure from "../../fx/TextPressure";
 import Button from "../../shared/Button";
+import CopyEmailButton from "../../shared/CopyEmailButton";
 
 const floaters = [
   { label: "Email", href: `mailto:${site.email}`, className: "bg-lime text-ink" },
@@ -53,6 +54,18 @@ export default function InteractiveContact() {
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted md:text-lg">
             {site.contactSupporting} Drag the channels into place, then leave a note.
           </p>
+        </FadeIn>
+        <FadeIn delay={0.16}>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Magnet>
+              <Button href={`mailto:${site.email}`} external>
+                {site.email}
+              </Button>
+            </Magnet>
+            <Magnet strength={16}>
+              <CopyEmailButton />
+            </Magnet>
+          </div>
         </FadeIn>
       </section>
 
