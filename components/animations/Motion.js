@@ -11,12 +11,14 @@ export function FadeIn({
 }) {
   const reduce = useReducedMotion();
 
+  // Use mount animation (animate), not whileInView. On this site content often
+  // mounts after the experience choice, and whileInView was leaving whole
+  // sections stuck at opacity 0 so personal details looked "missing".
   return (
     <Component
       className={className}
       initial={reduce ? false : { opacity: 0, y }}
-      whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once, amount: 0.2, margin: "0px 0px -8% 0px" }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay }}
       {...props}
     >
@@ -32,8 +34,7 @@ export function Stagger({ children, className, delay = 0 }) {
     <motion.div
       className={className}
       initial={reduce ? false : "hidden"}
-      whileInView={reduce ? undefined : "show"}
-      viewport={{ once: true, amount: 0.15 }}
+      animate={reduce ? undefined : "show"}
       variants={{
         hidden: {},
         show: {
@@ -74,8 +75,6 @@ export function PageTransition({ children, className }) {
   return (
     <motion.div
       className={className}
-      // Avoid opacity-0 first paint — if the enter animation never runs,
-      // the whole page looks blank after choosing an experience.
       initial={false}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
