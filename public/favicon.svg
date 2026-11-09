@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Toba">
+  <rect width="64" height="64" rx="16" fill="#0C0C0C"/>
+  <!-- Bold geometric T -->
+  <rect x="14" y="16" width="36" height="10" rx="2.5" fill="#F6F1E8"/>
+  <rect x="26" y="24" width="12" height="24" rx="2.5" fill="#F6F1E8"/>
+  <!-- Brand accents -->
+  <circle cx="47" cy="47" r="5.5" fill="#FF5A3C"/>
+  <circle cx="17" cy="47" r="3.5" fill="#C8F000"/>
+</svg>

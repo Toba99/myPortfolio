@@ -48,10 +48,12 @@ export default function ExperienceSelector() {
         <motion.div
           key="experience-selector"
           className="fixed inset-0 z-50 overflow-y-auto bg-cream"
-          initial={reduce ? false : { opacity: 0 }}
+          // Stay visible by default — fading in from opacity 0 was sticking
+          // invisible on some production loads and looking like a blank site.
+          initial={false}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
+          exit={reduce ? undefined : { opacity: 0 }}
+          transition={{ duration: 0.2 }}
           role="dialog"
           aria-modal="true"
           aria-labelledby="experience-selector-title"
@@ -78,8 +80,7 @@ export default function ExperienceSelector() {
                   <motion.button
                     type="button"
                     onClick={() => setExperience(option.id)}
-                    initial={reduce ? false : { opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={false}
                     whileHover={reduce ? undefined : { y: -8, scale: 1.015 }}
                     transition={{ delay: 0.1 + index * 0.08, duration: 0.5 }}
                     className={cn(

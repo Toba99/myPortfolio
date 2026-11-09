@@ -71,12 +71,12 @@ export function StaggerItem({ children, className, y = 20 }) {
 }
 
 export function PageTransition({ children, className }) {
-  const reduce = useReducedMotion();
-
   return (
     <motion.div
       className={className}
-      initial={reduce ? false : { opacity: 0 }}
+      // Avoid opacity-0 first paint — if the enter animation never runs,
+      // the whole page looks blank after choosing an experience.
+      initial={false}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
     >

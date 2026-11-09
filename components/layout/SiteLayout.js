@@ -28,6 +28,11 @@ export default function SiteLayout({ children, title, description }) {
         <title>{pageTitle}</title>
         <meta name="description" content={description || site.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="theme-color" content={isGraphic ? "#F6F1E8" : "#F4F4F2"} />
       </Head>
 
       <ExperienceSelector />
