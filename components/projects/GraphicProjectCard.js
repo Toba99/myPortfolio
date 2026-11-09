@@ -1,19 +1,14 @@
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import Tag from "../shared/Tag";
 import { cn } from "../../lib/cn";
 import { ProjectVisual } from "../experiences/graphic/ProjectVisual";
 
 export default function GraphicProjectCard({ project, featured = false, priority = false }) {
-  const reduce = useReducedMotion();
-
   return (
     <Link href={`/projects/${project.slug}`} passHref>
-      <motion.a
-        whileHover={reduce ? undefined : { y: -8 }}
-        transition={{ type: "spring", stiffness: 260, damping: 22 }}
+      <a
         className={cn(
-          "group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-black/5 bg-white p-4 text-ink shadow-card transition-shadow hover:shadow-lift md:p-5",
+          "group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-black/5 bg-white p-4 text-ink shadow-card transition duration-300 ease-out hover:-translate-y-2 hover:shadow-lift md:p-5",
           featured && "md:flex-row md:items-stretch md:gap-8 md:p-6"
         )}
       >
@@ -27,17 +22,13 @@ export default function GraphicProjectCard({ project, featured = false, priority
             featured && "md:aspect-auto md:min-h-[320px] md:w-[58%] md:shrink-0"
           )}
         >
-          <motion.div
-            className="absolute inset-0"
-            whileHover={reduce ? undefined : { scale: 1.04 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div className="absolute inset-0 transition duration-500 ease-out group-hover:scale-105">
             <ProjectVisual
               slug={project.slug}
               priority={priority}
               sizes={featured ? "(min-width: 768px) 700px, 100vw" : "(min-width: 768px) 33vw, 100vw"}
             />
-          </motion.div>
+          </div>
         </div>
 
         <div className={cn("flex flex-1 flex-col px-1 pb-1 pt-4", featured && "md:justify-center md:py-4")}>
@@ -63,7 +54,7 @@ export default function GraphicProjectCard({ project, featured = false, priority
             ))}
           </div>
         </div>
-      </motion.a>
+      </a>
     </Link>
   );
 }
